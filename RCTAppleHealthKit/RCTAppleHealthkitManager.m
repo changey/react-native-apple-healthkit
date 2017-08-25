@@ -8,7 +8,6 @@
 
 #import "RCTAppleHealthkitManager.h"
 #import <HealthKit/HealthKit.h>
-#import "BackgroundRefreshLogger.h"
 #import "RCTAppleHealthkitEventEmitter.h"
 
 @interface  RCTAppleHealthkitManager ()
