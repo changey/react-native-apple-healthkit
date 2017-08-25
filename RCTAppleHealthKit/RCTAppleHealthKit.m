@@ -231,7 +231,7 @@ RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock
             @"name" : @"react-native-apple-healthkit",
             @"description" : @"A React Native bridge module for interacting with Apple HealthKit data",
             @"className" : @"RCTAppleHealthKit",
-            @"author": @"Greg Wilson",
+            @"author": @"Eric Chang, Greg Wilson",
     };
     callback(@[[NSNull null], info]);
 }
