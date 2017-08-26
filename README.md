@@ -42,6 +42,8 @@ A React Native bridge module for interacting with [Apple HealthKit] data.
       * [getRespiratoryRateSamples](#getrespiratoryratesamples)
       * [getBloodGlucoseSamples](#getbloodglucosesamples)
       * [getSleepSamples](#getsleepsamples)
+
+  * [Background Healthkit Data Listener](#background-healthkit-data-listener)
   * [Examples](#examples)
 
 
@@ -911,7 +913,45 @@ AppleHealthKit.getSleepSamples(options, (err: Object, samples: Array<Object>) =>
 });
 ```
 
+## Background Healthkit Data Listener
 
+It's not as useful if the library can only read healthkit data while the is in the foreground. This part is to set up the listener so that if the user has new data points for  supported healthkit data type, it'll trigger the listener and subsequent actions can be developed even if the app is in the background.
+
+Current supported background healthkit type - sleep, blood pressure, blood glucose, step count, weight height, and heart rate. It's not hard to support new ones by adding them in `RCTAppleHealthkitManager.m`
+
+The function is essentially using the iOS HKObserverQuery function
+
+`https://developer.apple.com/documentation/healthkit/hkobserverquery`
+
+### Setup Background Healthkit Data Listener
+
+- In the `AppDelegate.m`, add
+
+```
+#import "RCTAppleHealthkitManager.h"
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  [[RCTAppleHealthkitManager sharedManager] setupHKListener];
+  ...
+}
+```
+- In the react-native js file that you'd like to set up the listener, add
+
+```
+var AppleHealthKit = require('react-native-apple-healthkit');
+
+const healthkitEventEmitter = new NativeEventEmitter(AppleHealthKit);
+
+    healthkitEventEmitter.addListener('healthkitValueAddedHandler', (data) => {
+
+      //The data is currently empty, it's just a listener. Further development can be done to get additional data.
+    });
+```
+
+## References
+
+This is based on the work of https://github.com/GregWilson/react-native-apple-healthkit
 
 ## Examples
 
