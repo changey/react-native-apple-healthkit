@@ -8,7 +8,7 @@
 
 #import "RCTAppleHealthkitManager.h"
 #import <HealthKit/HealthKit.h>
-#import "RCTAppleHealthKitEventEmitter.h"
+#import "RCTAppleHealthKit.h"
 
 @interface  RCTAppleHealthkitManager ()
 
@@ -34,7 +34,7 @@
     NSLog(@"healthkitValueAddedHandler");
     
     NSDictionary *dict = [[NSDictionary alloc] init];
-    [RCTAppleHealthKitEventEmitter emitEventWithName:@"healthkit" andPayload:dict];
+    [RCTAppleHealthKit emitEventWithName:@"healthkit" andPayload:dict];
     
 }
 

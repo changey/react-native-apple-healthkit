@@ -11,13 +11,15 @@
 #import "RCTBridgeModule.h"
 #import "RCTUtils.h"
 #import "RCTLog.h"
+#import "RCTEventEmitter.h"
 
-@interface RCTAppleHealthKit : NSObject <RCTBridgeModule>
+@interface RCTAppleHealthKit : RCTEventEmitter <RCTBridgeModule>
 
 @property (nonatomic) HKHealthStore *healthStore;
 
 - (void)isHealthKitAvailable:(RCTResponseSenderBlock)callback;
 - (void)initializeHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)getModuleInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
++ (void)emitEventWithName:(NSString *)name andPayload:(NSDictionary *)payload;
 
 @end
